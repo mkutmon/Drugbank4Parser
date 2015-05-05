@@ -8,7 +8,7 @@
 	
 	<path id="project.class.path">
 		<fileset dir="${lib.dir}">
-			<include name="jdom.jar"/>
+			<include name="jdom-2.0.6.jar"/>
 		</fileset>
 	</path>
 	
@@ -30,7 +30,7 @@
 	
 	<target name="jar" depends="compile"> 
 		<echo>Creating JAR: ${jar.name}</echo>
-		<unjar src="${lib.dir}/jdom.jar" dest="${build.dir}"/>
+		<unjar src="${lib.dir}/jdom-2.0.6.jar" dest="${build.dir}"/>
 		<jar jarfile="${jar.name}">
 			<fileset dir="build">
 				<include name="**/*.class"/>
