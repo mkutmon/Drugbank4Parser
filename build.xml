@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<project name="DrugBank4Parser" default="jar" basedir=".">
+
+	<property name="src.dir" value="src"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="build.dir" value="build"/>
+	<property name="jar.name" value="${ant.project.name}.jar"/>
+	
+	<path id="project.class.path">
+		<fileset dir="${lib.dir}">
+			<include name="jdom.jar"/>
+		</fileset>
+	</path>
+	
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+		<delete file="${jar.name}"/>
+	</target>
+	
+	<target name="prepare">
+		<mkdir dir="${build.dir}"/>
+	</target>
+	
+	<target name="compile" depends="prepare">
+		<echo>Compiling: ${jar.name}</echo>
+		<javac srcdir="${src.dir}" includes="**" destdir="${build.dir}" debug="true">
+			<classpath refid="project.class.path"/>
+		</javac>
+	</target>
+	
+	<target name="jar" depends="compile"> 
+		<echo>Creating JAR: ${jar.name}</echo>
+		<unjar src="${lib.dir}/jdom.jar" dest="${build.dir}"/>
+		<jar jarfile="${jar.name}">
+			<fileset dir="build">
+				<include name="**/*.class"/>
+			</fileset>
+		</jar>
+	</target>
+</project>
